@@ -1,28 +1,27 @@
 import React from 'react';
 import T from 'prop-types';
-import { Alert, Divider } from 'antd';
+import {Alert, Divider} from 'antd';
 
-import { createAdvert } from '../../../api/adverts';
 import Layout from '../../layout';
 import NewAdvertForm from './NewAdvertForm';
+import store from '../../../store';
 
 class NewAdvertPage extends React.Component {
   state = {
     error: null,
   };
 
-  handleSubmit = advert => {
-    const { history } = this.props;
+  handleSubmit = (advert) => {
+    const {history} = this.props;
     this.resetError();
-    createAdvert(advert)
-      .then(({ result: advert }) => history.push(`/adverts/${advert._id}`))
-      .catch(error => this.setState({ error }));
+    //Llamada al dispatch, se ejecuta la accion...
+    store.dispatch({type: 'createdAd', advert, history});
   };
 
-  resetError = () => this.setState({ error: null });
+  resetError = () => this.setState({error: null});
 
   render() {
-    const { error } = this.state;
+    const {error} = this.state;
     return (
       <Layout title="New advert">
         <Divider>Create an advert</Divider>
@@ -42,7 +41,7 @@ class NewAdvertPage extends React.Component {
 }
 
 NewAdvertPage.propTypes = {
-  history: T.shape({ push: T.func.isRequired }).isRequired,
+  history: T.shape({push: T.func.isRequired}).isRequired,
 };
 
 export default NewAdvertPage;
