@@ -1,41 +1,48 @@
 import React from 'react';
 import T from 'prop-types';
-import { Alert, Col, Row, Typography } from 'antd';
+import {Alert, Col, Row, Typography} from 'antd';
+import {Redirect} from 'react-router-dom';
 
-import { login } from '../../../api/auth';
+import {login} from '../../../api/auth';
 import LoginForm from './LoginForm';
+import storage from '../../../utils/storage';
 
-const { Title } = Typography;
+const {Title} = Typography;
 
 class LoginPage extends React.Component {
   state = {
     error: null,
   };
 
-  handleSubmit = credentials => {
-    const { onLogin, location, history } = this.props;
+  handleSubmit = (credentials) => {
+    const {onLogin, location, history} = this.props;
     this.resetError();
     login(credentials)
       .then(() => {
         onLogin(() => {
           // Navigate to previously required route
-          const { from } = location.state || { from: { pathname: '/' } };
+          const {from} = location.state || {from: {pathname: '/'}};
           history.replace(from);
         });
       })
-      .catch(error => {
-        this.setState({ error });
+      .catch((error) => {
+        this.setState({error});
       });
   };
 
-  resetError = () => this.setState({ error: null });
+  resetError = () => this.setState({error: null});
 
   render() {
-    const { error } = this.state;
+    const {error} = this.state;
+
+    const auth = storage.get('auth');
+
+    if (auth) return <Redirect to="/adverts" />;
+
     return (
       <Row>
-        <Col span={8} offset={8} style={{ marginTop: 64 }}>
-          <Title style={{ textAlign: 'center' }}>Log In</Title>
+        <Col span={8} offset={8} style={{marginTop: 64}}>
+          <Title style={{textAlign: 'center'}}>Log In</Title>
           <LoginForm onSubmit={this.handleSubmit} />
           {error && (
             <Alert
@@ -44,7 +51,7 @@ class LoginPage extends React.Component {
               message={error}
               showIcon
               type="error"
-              style={{ marginTop: 24 }}
+              style={{marginTop: 24}}
             />
           )}
         </Col>
@@ -55,9 +62,9 @@ class LoginPage extends React.Component {
 
 LoginPage.propTypes = {
   onLogin: T.func.isRequired,
-  history: T.shape({ replace: T.func.isRequired }).isRequired,
+  history: T.shape({replace: T.func.isRequired}).isRequired,
   location: T.shape({
-    state: T.shape({ from: T.shape({ pathname: T.string }) }),
+    state: T.shape({from: T.shape({pathname: T.string})}),
   }).isRequired,
 };
 
