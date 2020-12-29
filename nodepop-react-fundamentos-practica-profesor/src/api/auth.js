@@ -7,7 +7,7 @@ export const login = ({remember, ...credentials}) =>
     if (remember) {
       storage.set('auth', auth);
     }
-    store.dispatch({type: 'loggedIn', token: auth.token});
+    store.dispatch({type: 'LOGGED_IN', token: auth.token});
   });
 
 export const logout = () =>
