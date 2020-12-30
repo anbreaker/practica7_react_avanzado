@@ -4,7 +4,7 @@ import {Alert, Divider} from 'antd';
 
 import Layout from '../../layout';
 import NewAdvertForm from './NewAdvertForm';
-import store from '../../../store';
+import store from '../../../store/store';
 
 class NewAdvertPage extends React.Component {
   state = {

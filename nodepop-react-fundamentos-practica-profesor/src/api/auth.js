@@ -1,6 +1,6 @@
 import client from './client';
 import storage from '../utils/storage';
-import store from '../store';
+import store from '../store/store';
 
 export const login = ({remember, ...credentials}) =>
   client.login(credentials).then((auth) => {

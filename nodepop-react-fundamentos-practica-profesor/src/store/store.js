@@ -1,10 +1,7 @@
 import {createStore} from 'redux';
-import {createAdvert} from './api/adverts';
-import storage from './utils/storage';
-
-//Actions const
-const LOGGED_IN = 'LOGGED_IN';
-const CREATE_AD = 'CREATE_AD';
+import {createAdvert} from '../api/adverts';
+import storage from '../utils/storage';
+import {LOGGED_IN, CREATED_AD} from './types';
 
 const auth = storage.get('auth');
 const initialState = {
@@ -18,12 +15,12 @@ async function appReducer(state = initialState, action) {
       return {
         token: action.token,
       };
-    case CREATE_AD:
-      const ad = await createAdvert(action.advert);
-      action.history.push(`/adverts/${advert._id}`);
-      return {
-        adverts: [...state.adverts, ad],
-      };
+    // case CREATE_AD:
+    //   const ad = await createAdvert(action.advert);
+    //   action.history.push(`/adverts/${advert._id}`);
+    //   return {
+    //     adverts: [...state.adverts, ad],
+    //   };
     default:
       return state;
   }
@@ -32,4 +29,5 @@ async function appReducer(state = initialState, action) {
 const store = createStore(appReducer);
 store.subscribe(() => console.log(store.getState()));
 
+console.log(store);
 export default store;
