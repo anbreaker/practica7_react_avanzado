@@ -4,7 +4,8 @@ import {Alert, Divider} from 'antd';
 
 import Layout from '../../layout';
 import NewAdvertForm from './NewAdvertForm';
-import store from '../../../store/store';
+//comentado por store...
+// import {store} from '../../../store/store';
 
 class NewAdvertPage extends React.Component {
   state = {
@@ -14,8 +15,10 @@ class NewAdvertPage extends React.Component {
   handleSubmit = (advert) => {
     const {history} = this.props;
     this.resetError();
+
+    //comentado por store...
     //Llamada al dispatch, se ejecuta la accion...
-    store.dispatch({type: 'createdAd', advert, history});
+    // store.dispatch({type: 'createdAd', advert, history});
   };
 
   resetError = () => this.setState({error: null});
