@@ -18,7 +18,8 @@ configureClient(token);
 
 ReactDOM.render(
   <BrowserRouter>
-    <App isInitiallyLogged={!!token} />
+    {/* dispatch={store.dispatch} loggedUserId={token} ... luego se arregla???... cosas del profe... */}
+    <App isInitiallyLogged={!!token} dispatch={store.dispatch} loggedUserId={token} />
   </BrowserRouter>,
   document.getElementById('root')
 );
