@@ -4,6 +4,7 @@ export const types = {
 
   adsLoaded: '[UI] ADS_LOADED',
   adLoaded: '[UI] AD_LOADED',
-  createAd: '[UI] CREATED_AD',
-  deleteAd: '[UI] DELETED_AD',
+  adTags: '[UI] AD_TAGs',
+  adCreate: '[UI] AD_CREATED',
+  adDelete: '[UI] AD_DELETED',
 };
