@@ -1,24 +1,24 @@
 import React from 'react';
 import T from 'prop-types';
-import { Button, Checkbox, Input } from 'antd';
-import { MailOutlined, LockOutlined } from '@ant-design/icons';
+import {Button, Checkbox, Input} from 'antd';
+import {MailOutlined, LockOutlined} from '@ant-design/icons';
 
-import useForm from '../../../hooks/useForm';
+import {useForm} from '../../../hooks/useForm';
 import styles from './LoginForm.module.css';
 
-function LoginForm({ onSubmit }) {
+function LoginForm({onSubmit}) {
   const [form, handleChange] = useForm({
     email: '',
     password: '',
     remember: false,
   });
-  const { email, password, remember } = form;
+  const {email, password, remember} = form;
 
   const canSubmit = () => {
     return !!(email && password);
   };
 
-  const handleSubmit = ev => {
+  const handleSubmit = (ev) => {
     ev.preventDefault();
     onSubmit(form);
   };
@@ -45,8 +45,7 @@ function LoginForm({ onSubmit }) {
         name="remember"
         className={styles.input}
         onChange={handleChange}
-        checked={remember}
-      >
+        checked={remember}>
         Remember me
       </Checkbox>
       <Button type="primary" htmlType="submit" disabled={!canSubmit()} block>

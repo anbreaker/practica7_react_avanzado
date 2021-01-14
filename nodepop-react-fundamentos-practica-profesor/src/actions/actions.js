@@ -1,8 +1,8 @@
-import {LOGGED_IN, LOGGED_OUT} from './types';
+import {types} from '../types/types';
 
 export const authLogin = (loggedUserId) => {
   return {
-    type: LOGGED_IN,
+    type: types.login,
     payload: {
       loggedUserId,
     },
@@ -11,6 +11,6 @@ export const authLogin = (loggedUserId) => {
 
 export const authLogout = () => {
   return {
-    type: LOGGED_OUT,
+    type: types.logout,
   };
 };
