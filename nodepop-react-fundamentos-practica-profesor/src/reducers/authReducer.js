@@ -2,8 +2,10 @@ import {types} from '../types/types';
 import storage from '../utils/storage';
 
 const auth = storage.get('auth');
+
 const initialState = {
-  token: auth && auth.token ? auth.token : undefined,
+  auth: auth && auth.token ? auth.token : null,
+  ads: null,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -11,13 +13,13 @@ export const authReducer = (state = initialState, action) => {
     case types.login:
       return {
         ...state,
-        token: action.payload.loggedUserId,
+        auth: action.payload.loggedUserId,
       };
 
     case types.logout:
       return {
         ...state,
-        auth: initialState.token,
+        auth: null,
       };
 
     default:
