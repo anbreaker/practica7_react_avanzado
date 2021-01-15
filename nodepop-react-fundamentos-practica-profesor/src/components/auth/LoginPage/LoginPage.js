@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import T from 'prop-types';
 import {Alert, Col, Row, Typography} from 'antd';
 import {Redirect} from 'react-router-dom';
@@ -11,14 +11,15 @@ const {Title} = Typography;
 
 // function LoginPage({loginReques, loginSucces, loginFailure...})
 
-class LoginPage extends React.Component {
-  state = {
-    error: null,
-  };
+function LoginPage(props) {
+  const [error, setError] = useState(null);
 
-  handleSubmit = (credentials) => {
-    const {onLogin, location, history} = this.props;
-    this.resetError();
+  const resetError = () => setError(null);
+
+  const handleSubmit = (credentials) => {
+    const {onLogin, location, history} = props;
+
+    resetError();
     login(credentials)
       .then(() => {
         onLogin(() => {
@@ -28,38 +29,30 @@ class LoginPage extends React.Component {
         });
       })
       .catch((error) => {
-        this.setState({error});
+        setError(error.message);
       });
   };
 
-  resetError = () => this.setState({error: null});
-
-  render() {
-    const {error} = this.state;
-
-    const auth = storage.get('auth');
-
-    if (auth) return <Redirect to="/adverts" />;
-
-    return (
-      <Row>
-        <Col span={8} offset={8} style={{marginTop: 64}}>
-          <Title style={{textAlign: 'center'}}>Log In</Title>
-          <LoginForm onSubmit={this.handleSubmit} />
-          {error && (
-            <Alert
-              afterClose={this.resetError}
-              closable
-              message={error}
-              showIcon
-              type="error"
-              style={{marginTop: 24}}
-            />
-          )}
-        </Col>
-      </Row>
-    );
-  }
+  const auth = storage.get('auth');
+  if (auth) return <Redirect to="/adverts" />;
+  return (
+    <Row>
+      <Col span={8} offset={8} style={{marginTop: 64}}>
+        <Title style={{textAlign: 'center'}}>Log In</Title>
+        <LoginForm onSubmit={handleSubmit} />
+        {error && (
+          <Alert
+            afterClose={resetError}
+            closable
+            message={error}
+            showIcon
+            type="error"
+            style={{marginTop: 24}}
+          />
+        )}
+      </Col>
+    </Row>
+  );
 }
 
 LoginPage.propTypes = {
