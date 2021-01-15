@@ -10,10 +10,10 @@ const initialState = {
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.login:
+    case types.loginSuccess:
       return {
         ...state,
-        auth: action.payload.loggedUserId,
+        auth: action.payload,
       };
 
     case types.logout:

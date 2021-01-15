@@ -1,6 +1,7 @@
 export const types = {
-  login: '[Auth] LOGGED_IN',
-  logout: '[Auth] LOGGED_OUT',
+  loginRequest: '[Auth] Logged_in_request',
+  loginSuccess: '[Auth] Logged_in_success',
+  loginFailure: '[Auth] Logged_in_failure',
 
   adsLoaded: '[UI] ADS_LOADED',
   adLoaded: '[UI] AD_LOADED',

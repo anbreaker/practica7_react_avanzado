@@ -9,6 +9,8 @@ import storage from '../../../utils/storage';
 
 const {Title} = Typography;
 
+// function LoginPage({loginReques, loginSucces, loginFailure...})
+
 class LoginPage extends React.Component {
   state = {
     error: null,

@@ -8,7 +8,7 @@ import './index.css';
 import App from './components/App';
 import {store} from './store/store';
 
-// import {authLogin} from './actions/actions';
+import {authLoginRequest} from './actions/actions';
 
 // Read token from storage
 const {token} = storage.get('auth') || {token: null};
@@ -16,7 +16,7 @@ const {token} = storage.get('auth') || {token: null};
 // Configure api client
 configureClient(token);
 
-// store.dispatch(authLogin('id'));
+store.dispatch(authLoginRequest('id'));
 
 ReactDOM.render(
   <BrowserRouter>
