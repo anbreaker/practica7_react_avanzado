@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useDispatch, useState} from 'react';
 import T from 'prop-types';
 import {Alert, Col, Row, Typography} from 'antd';
 import {Redirect} from 'react-router-dom';
@@ -13,13 +13,12 @@ const {Title} = Typography;
 
 function LoginPage(props) {
   const [error, setError] = useState(null);
-
-  const resetError = () => setError(null);
+  // const dispatch = useDispatch();
 
   const handleSubmit = (credentials) => {
     const {onLogin, location, history} = props;
 
-    resetError();
+    setError(null);
     login(credentials)
       .then(() => {
         onLogin(() => {
@@ -42,7 +41,7 @@ function LoginPage(props) {
         <LoginForm onSubmit={handleSubmit} />
         {error && (
           <Alert
-            afterClose={resetError}
+            afterClose={setError(null)}
             closable
             message={error}
             showIcon
