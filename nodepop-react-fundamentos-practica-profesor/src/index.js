@@ -16,7 +16,7 @@ const {token} = storage.get('auth') || {token: null};
 // Configure api client
 configureClient(token);
 
-store.dispatch(authLoginRequest('id'));
+store.dispatch(authLoginRequest('user@example.com', '1234', false));
 
 ReactDOM.render(
   <BrowserRouter>

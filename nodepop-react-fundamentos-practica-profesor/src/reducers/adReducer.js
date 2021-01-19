@@ -1,21 +1,27 @@
 import {types} from '../types/types';
 
 const initialState = {
-  auth: null,
   adverts: null,
   tags: null,
   advert: null,
 };
 
-export const adverts = (state = initialState.adverts, action) => {
+export const adReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.adsLoaded:
-      return action.payload.adverts;
+      return {
+        ...state,
+        adverts: action.payload.adverts,
+      };
 
     case types.adLoaded:
-      return action.payload.advert;
+      return {
+        ...state,
+        advert: action.payload.advert,
+      };
 
     case types.adDelete:
+      //filter
       return action.payload.advertId;
 
     case types.adTags:

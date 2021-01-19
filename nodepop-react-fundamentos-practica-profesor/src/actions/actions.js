@@ -1,15 +1,24 @@
 import {types} from '../types/types';
+import {login} from '../api/auth';
+import storage from '../utils/storage';
 
-export const authLoginRequest = () => {
-  return {
-    type: types.loginRequest,
+export const authLoginRequest = (email, password, remember = false) => {
+  return (dispatch) => {
+    login({email, password})
+      .then(({token}) => {
+        if (remember) storage.set('token', token);
+        dispatch(authLoginSuccess(token));
+      })
+      .catch((error) => {
+        console.error('Error ->', error);
+      });
   };
 };
 
-export const authLoginSuccess = (loggedUserId) => {
+export const authLoginSuccess = (token) => {
   return {
     type: types.loginSuccess,
-    payload: loggedUserId,
+    token,
   };
 };
 
@@ -27,10 +36,10 @@ export const authLogout = () => {
   };
 };
 
-export const advertsLoaded = (adverts) => {
+export const advertsLoaded = () => {
   return {
     type: types.adsLoaded,
-    payload: adverts,
+    payload: {},
   };
 };
 

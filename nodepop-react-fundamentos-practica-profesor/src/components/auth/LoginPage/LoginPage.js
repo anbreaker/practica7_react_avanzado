@@ -9,7 +9,7 @@ import storage from '../../../utils/storage';
 
 const {Title} = Typography;
 
-// function LoginPage({loginReques, loginSucces, loginFailure...})
+// function LoginPage({loginRequest, loginSucces, loginFailure...})
 
 function LoginPage(props) {
   const [error, setError] = useState(null);

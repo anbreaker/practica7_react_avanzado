@@ -1,4 +1,5 @@
 // import Swal from 'sweetalert2';
+// import {login} from '../../../api/auth';
 // import {types} from '../types/types';
 
 // export const startLoginEmailPassword = (credentials, props) => {
@@ -7,6 +8,7 @@
 
 //     login(credentials)
 //       .then(() => {
+//         dispatch(authLoginSuccess());
 //         onLogin(() => {
 //           // Navigate to previously required route
 //           const {from} = location.state || {from: {pathname: '/'}};
@@ -18,6 +20,5 @@
 //         console.error('Error ->', error);
 //         Swal.fire('Error', error.message, 'error');
 //       });
-//     dispatch(startLoading());
 //   };
 // };

@@ -3,24 +3,15 @@ import storage from '../utils/storage';
 
 const auth = storage.get('auth');
 
-const initialState = {
-  auth: auth && auth.token ? auth.token : null,
-  ads: null,
-};
+const initialState = auth && auth.token ? auth.token : null;
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.loginSuccess:
-      return {
-        ...state,
-        auth: action.payload,
-      };
+      return action.token;
 
     case types.logout:
-      return {
-        ...state,
-        auth: null,
-      };
+      return null;
 
     default:
       return state;
